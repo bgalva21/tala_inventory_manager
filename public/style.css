@@ -1,0 +1,83 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:1rem;
+    gap:3rem;
+}
+
+.product-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-buttons{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+
+table{
+    border-radius:12px;
+    table-layout: fixed;
+    width: 90%;
+    margin: 10px auto;
+    border: 1px solid black;
+
+
+}
+
+th{
+    padding: 1rem; 
+}
+
+td{
+    text-align: center;
+    padding: .5rem;
+}
+
+tr:nth-child(even){
+    background-color: rgba(112, 128, 144, 0.281);
+}
+
+button{
+    padding: .7rem 1.2rem;
+    border:none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit-product-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:.5rem;
+}
+
+.form-group{
+    display:flex;
+    flex-direction: column;
+
+}
+
+label{
+    font-size:.8rem;
+}
+
+input{
+    padding:.5rem .7rem;
+    border:1px solid black;
+    border-radius: 6px;
+    
+}

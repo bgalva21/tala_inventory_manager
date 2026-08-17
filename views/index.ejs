@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>TD Product Hub</title>
+</head>
+<body>
+    <h1>TalaveraDumont Product Hub</h1>
+
+    <% if(products && categories){ %>
+        <div class="product-section" >
+            <div class="category-buttons">
+                <% categories.forEach(category =>{ %>
+                    <form action="/category/v1/<%= category.category_id %>" method="GET">
+                        <button type="submit"> <%= category.name %> </button>
+                    </form>
+                <% }) %>
+            </div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+                <tbody>
+                <% for(let i = 0; i < products.length; i++ ){ %>
+                    <tr>
+                        <td><%= products[i].product_name %></td>
+                        <td><%= products[i].description %></td>
+                        <td><%= products[i].price %></td>
+                        <td><%= products[i].stock %></td>
+                        <td><form action="/product/v1/<%= products[i].product_id %>" method="GET"><button type="submit">Edit item</button></form></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</body>
+</html>

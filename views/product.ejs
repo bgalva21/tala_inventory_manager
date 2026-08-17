@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <% if(product) { %> 
+        <h1><%= product[0].product_name %> </h1>
+
+        <form action="/" method="POST" class="edit-product-form" >
+            <input type="text" name="id" id="id" value="<%=product[0].product_id %>" hidden>
+            <div class="form-group" >
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<%=product[0].product_name %>">
+            </div>
+            
+            <div class="form-group" >
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" value="<%=product[0].description %>">
+            </div>
+            
+            <div class="form-group" >
+                <label for="price">Price</label>
+                <input type="text" name="price" id="price" value="<%=product[0].price %>">
+            </div>
+            
+            <div class="form-group" >
+                <label for="stock">Items in Stock</label>
+                <input type="stock" name="stock" id="stock" value="<%=product[0].stock %>">
+            </div>
+                    
+            <button type="submit">Submit</button>
+        </form>
+
+    <% } %>
+</body>
+</html>
