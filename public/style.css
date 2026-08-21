@@ -81,3 +81,25 @@ input{
     border-radius: 6px;
     
 }
+
+.delete-btn{
+    padding: .7rem 1.2rem;
+    border:none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: red;
+    color:white;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10rem;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}

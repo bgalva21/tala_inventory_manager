@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header" >
+        <a href="/products">< Back</a>
+        <h1>Create a Product </h1>
+    </div>
+    <form action="/create" method="POST" class="edit-product-form" >
+        <div class="form-group" >
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+        
+        <div class="form-group" >
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description">
+        </div>
+        
+        <div class="form-group" >
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price">
+        </div>
+        
+        <div class="form-group" >
+            <label for="stock">Items in Stock</label>
+            <input type="stock" name="stock" id="stock">
+        </div>
+        <div>
+            <label for="categories">Category</label>
+            <select name="categories" id="categories">
+                <% if(categories) { %>
+                   <% categories.forEach(category =>{ %>
+                        <option value="<%= category.category_id %>"> <%= category.name %> </option>
+                    <% }) %>
+                <% } %>
+            </select>
+        </div>
+                
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

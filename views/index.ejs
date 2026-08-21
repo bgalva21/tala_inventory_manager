@@ -12,18 +12,54 @@
     <% if(products && categories){ %>
         <div class="product-section" >
             <div class="category-buttons">
-                <% categories.forEach(category =>{ %>
-                    <form action="/category/v1/<%= category.category_id %>" method="GET">
-                        <button type="submit"> <%= category.name %> </button>
-                    </form>
-                <% }) %>
+                <form action="/products" method="GET">
+                    <button
+                        type="submit"
+                    >
+                    All</button>
+                    <% categories.forEach(category => { %>
+                        <button
+                            type="submit"
+                            name="category"
+                            value="<%= category.category_id %>"
+                        >
+                            <%= category.name %>
+                        </button>
+                    <% }) %>
+                </form>
+                <form action="/category" method="GET" >
+                    <button
+                        type="submit"
+                        name="form"
+                        value="create"
+                    >
+                        add category
+                    </button>
+                </form>
+
+                <form action="/category" method="GET">
+                    <button
+                        type="submit"
+                        name="form"
+                        value="delete"
+                    >
+                    delete category
+                    </button>
+                </form>
+                
             </div>
             <table>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Price</th>
-                    <th>Stock</th>
+                    <th>Price </th>
+                    <th>Stock </th>
+                    <th>Total Value</th>
+                    <th>
+                        <form action="/create" method="GET">
+                            <button type="submit">create a product</button>
+                        </form>
+                    </th>
                 </tr>
                 <tbody>
                 <% for(let i = 0; i < products.length; i++ ){ %>
@@ -32,6 +68,7 @@
                         <td><%= products[i].description %></td>
                         <td><%= products[i].price %></td>
                         <td><%= products[i].stock %></td>
+                        <td>$<%= (parseFloat(products[i].price.replace("$","")) * products[i].stock).toFixed(2) %></td>
                         <td><form action="/product/v1/<%= products[i].product_id %>" method="GET"><button type="submit">Edit item</button></form></td>
                     </tr>
                 <% } %>

@@ -8,10 +8,11 @@
 </head>
 <body>
     <% if(product) { %> 
-        <h1><%= product[0].product_name %> </h1>
-
-        <form action="/" method="POST" class="edit-product-form" >
-            <input type="text" name="id" id="id" value="<%=product[0].product_id %>" hidden>
+        <div class="header" >
+            <a href="/products">< Back</a>
+            <h1><%= product[0].product_name %> </h1>
+        </div>
+        <form action="/product/v1/<%=product[0].product_id %>" method="POST" class="edit-product-form" >
             <div class="form-group" >
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" value="<%=product[0].product_name %>">
@@ -33,6 +34,10 @@
             </div>
                     
             <button type="submit">Submit</button>
+        </form>
+
+        <form action="/delete/product/v1/<%=product[0].product_id %>" method="POST">
+            <button type="submit" class="delete-btn">DELETE PRODUCT</button>
         </form>
 
     <% } %>

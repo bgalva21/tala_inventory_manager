@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    
+
+    <% if(type === 'create') { %>
+        <div class="header">
+            <a href="/products">< Back</a>
+            <h1>Create Category Form</h1>
+        </div>
+        <form action="/category" method="POST">
+            <label for="category">Category: </label>
+            <input type="text" name="category" id="category" required>
+            <button
+                type="submit"
+                name="form_type"
+                value="create"
+            >
+                Submit
+            </button>
+        </form>
+    <% } %>
+
+    <% if (type === 'delete') { %>
+        <div class="header">
+            <a href="/products">< Back</a>
+            <h1>Delete Category Form</h1>
+            
+        </div>
+
+        <% if(error){ %>
+            <p>Cannot Delete category that contains products!</p>
+        <% } %>
+
+        <form action="/category" method="POST">
+            <select name="categoryId" id="categoryId">
+            <% if(categories) { %>
+                   <% categories.forEach(category =>{ %>
+                        <option value="<%= category.category_id %>"> <%= category.name %> </option>
+                    <% }) %>
+            <% } %>
+            </select>
+            <button 
+                class="delete-btn"
+                type="submit"
+                name="form_type"
+                value="delete"
+            >
+                Delete
+            </button>
+        </form>
+    <% } %>
+</body>
+</html>
