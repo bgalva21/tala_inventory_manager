@@ -1,12 +1,18 @@
 const pool = require("./pool");
 
 async function getAllProducts(){
-    const products = await pool.query('SELECT * FROM products');
+    const products = await pool.query('SELECT * FROM products ORDER by product_name');
     return products.rows;
 };
 
+async function getAllProductsStockSorted(sort){
+    const sortDirection = sort === "DESC" ? "DESC" : "ASC";
+    const products = await pool.query(`SELECT * FROM products ORDER by stock ${sortDirection}`);
+    return products.rows;
+}
+
 async function getAllCategories(){
-    const categories = await pool.query('SELECT * FROM categories');
+    const categories = await pool.query('SELECT * FROM categories ');
     return categories.rows;
 };
 
@@ -45,18 +51,13 @@ async function deleteCategory(id){
     await pool.query("DELETE FROM categories WHERE category_id = $1",[id]);
 }
 
-// async function sortPrice(type){
-//     if(type ==='DESC'){
-//         const products = await pool.query('SELECT * FROM products ORDER BY price DESC');
-//         return products.rows;
-//     }else{
-//         const products = await pool.query('SELECT * FROM products ORDER BY price');
-//         return products.rows;
-//     }
+async function getProductByCategorySorted(category,sort){
 
-//     //SELECT * FROM categories JOIN products ON products.category_id = categories.category_id WHERE categories.category_id = 3 ORDER BY price;
+    const sortDirection = sort === "DESC" ? "DESC" : "ASC";
 
-// };
+    const products = await pool.query(`SELECT * FROM categories JOIN products ON products.category_id = categories.category_id WHERE categories.category_id = $1 ORDER BY products.stock ${sortDirection}`,[category]);
+    return products.rows;
+}
 
 
 
@@ -70,5 +71,7 @@ module.exports = {
     getProductByCategory,
     getProductTableSize,
     createCategory,
-    deleteCategory
+    deleteCategory,
+    getProductByCategorySorted,
+    getAllProductsStockSorted,
 };

@@ -5,23 +5,41 @@ const { body, validationResult } = require("express-validator");
 const getProducts = async (req,res) =>{
     try{
 
-        const category = req.query.category;
+        const {sort ,category} = req.query;
         const categories = await db.getAllCategories();
 
+        console.log(sort);
+
         if(category){
-            let products = await db.getProductByCategory(category);
-            return res.render('index', {products:products , categories:categories});
+            if(!sort){
+                let products = await db.getProductByCategory(category);
+                return res.render('index', {products:products , categories:categories, selectedCategory:category});
+            }
+
+            let products = await db.getProductByCategorySorted(category,sort);
+            console.log(products);
+
+            return res.render('index', {products:products, categories:categories, selectedCategory:category})
+
         }else{
-            let products = await db.getAllProducts();
-            return res.render('index', {products:products , categories:categories});
+
+            if(!sort){
+                let products = await db.getAllProducts("");
+                return res.render('index', {products:products , categories:categories , selectedCategory:""});
+            }
+
+            let products = await db.getAllProductsStockSorted(sort);
+            return res.render('index', {products:products , categories:categories , selectedCategory:""});
+            
         }  
     }catch(e){
         //server error
-        console.error(`Could not get products or categories, error: `,e);
+        console.error(`Could not get products or categories`,e);
         return res.status(500).send("Internal Server Error");
     }
     
 }
+
 
 const getProduct = async (req,res) =>{
 

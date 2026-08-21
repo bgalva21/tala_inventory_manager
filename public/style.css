@@ -103,3 +103,11 @@ a{
     text-decoration: none;
     color:black;
 }
+
+.td-row{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}

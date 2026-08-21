@@ -9,7 +9,6 @@
 <body>
     <h1>TalaveraDumont Product Hub</h1>
 
-    <% if(products && categories){ %>
         <div class="product-section" >
             <div class="category-buttons">
                 <form action="/products" method="GET">
@@ -53,7 +52,33 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price </th>
-                    <th>Stock </th>
+                    <th>Stock 
+                        <div class="sort-btns">
+                                <form action="/products" method="GET">
+                                    <% if(selectedCategory){ %>
+                                        <input 
+                                            type="hidden"
+                                            name="category"
+                                            value="<%= selectedCategory %>"
+                                        >
+                                    <% } %>
+                                    <button
+                                        type="submit"
+                                        name="sort"
+                                        value="DESC"
+                                    >
+                                        ↑
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="sort"
+                                        value="ASC"
+                                    >
+                                        ↓
+                                    </button>
+                                </form>
+                            </div>
+                    </th>
                     <th>Total Value</th>
                     <th>
                         <form action="/create" method="GET">
@@ -64,7 +89,7 @@
                 <tbody>
                 <% for(let i = 0; i < products.length; i++ ){ %>
                     <tr>
-                        <td><%= products[i].product_name %></td>
+                        <td class="td-row" ><p><%= i + 1%></p> <%= products[i].product_name %></td>
                         <td><%= products[i].description %></td>
                         <td><%= products[i].price %></td>
                         <td><%= products[i].stock %></td>
@@ -75,6 +100,5 @@
                 </tbody>
             </table>
         </div>
-    <% } %>
 </body>
 </html>
